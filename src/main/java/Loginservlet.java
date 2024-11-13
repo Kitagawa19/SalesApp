@@ -43,7 +43,7 @@ public class Loginservlet extends HttpServlet {
 					dispatcher.forward(request, response);
 				}
 			}catch(){
-
+				throw new ServletException(e);
 			}
 	}
 }
