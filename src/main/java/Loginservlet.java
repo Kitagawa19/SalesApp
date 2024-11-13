@@ -21,8 +21,7 @@ public class Loginservlet extends HttpServlet {
 
 	//ログイン画面を表示させる
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher =
-				request.getRequestDispatcher("/Login.jsp");
+		RequestDispatcher dispatcher =request.getRequestDispatcher("/Login.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -34,6 +33,17 @@ public class Loginservlet extends HttpServlet {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			
-			
+			try{
+				if(){
+					RequestDispatcher dispatcher =request.getRequestDispatcher("/OrderList.jsp");
+					dispatcher.forward(request, response);
+				}else {
+					request.getAttribute("errorMessage","ユーザー名またはパスワードが違います");
+					RequestDispatcher dispatcher =request.getRequestDispatcher("/Login.jsp");
+					dispatcher.forward(request, response);
+				}
+			}catch(){
+
+			}
 	}
 }
