@@ -7,14 +7,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import org.apache.catalina.servlets.DefaultServlet.SortManager.Order;
-
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import salesapp.Order;
 
 /**
  * Servlet implementation class OrderServlet
@@ -57,7 +56,7 @@ public class OrderServlet extends HttpServlet {
 		}catch(Exception e){
 			throw new ServletException(e);
 		}
-		request.getAttribute("orderList",orders);
+		request.setAttribute("orderList",orders);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/OrderList.jsp");
 		dispatcher.forward(request,response);
 	}
