@@ -1,12 +1,20 @@
 
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import org.apache.catalina.servlets.DefaultServlet.SortManager.Order;
+
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Servlet implementation class OrderServlet
@@ -28,10 +36,16 @@ public class OrderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ArrayList<String> orders = new ArraList<>();
+		//　別ファイルでOrderクラスを作成すると解決するが保持するデータがどのようなものか未定なため未解決
+		ArrayList<Order> orders = new ArrayList<Order>();
+
 		try{
-			ResultSet res = statement.executeQuery();
-			while(res.next()) {
+			Connection conn = DriverManager.getConnection(url,user,email);
+			Statement statement = conn.createStatement();
+			String query="";
+			ResultSet resultSet = statement.executeQuery(query);
+			
+			while(resultSet.next()) {
 				String orderId = resultSet.getString("");
 				String orderDate = resultSet.getString("");
 				String name = resultSet.getString("");
@@ -40,11 +54,11 @@ public class OrderServlet extends HttpServlet {
 				Order order = new Order(orderId, orderDate, name, status, total);
 				orders.add(order);
 			}
-		}catch(){
+		}catch(Exception e){
 			throw new ServletException(e);
 		}
-		request.getAttribute(orders);
-		RequestDispatcher dispather = request.getRequestDispatcher("/OrderList.jsp");
+		request.getAttribute("orderList",orders);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/OrderList.jsp");
 		dispatcher.forward(request,response);
 	}
 
