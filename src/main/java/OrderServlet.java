@@ -6,10 +6,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class OrderServlet
  */
+@WebServlet("/OrderServlet")
 public class OrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +28,24 @@ public class OrderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ArrayList<String> orders = new ArraList<>();
+		try{
+			ResultSet res = statement.executeQuery();
+			while(res.next()) {
+				String orderId = resultSet.getString("");
+				String orderDate = resultSet.getString("");
+				String name = resultSet.getString("");
+				String status = resultSet.getString("");
+				String total = resultSet.getString("");
+				Order order = new Order(orderId, orderDate, name, status, total);
+				orders.add(order);
+			}
+		}catch(){
+			throw new ServletException(e);
+		}
+		request.getAttribute(orders);
+		RequestDispatcher dispather = request.getRequestDispatcher("/OrderList.jsp");
+		dispatcher.forward(request,response);
 	}
 
 	/**
