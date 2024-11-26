@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 <%@ page import="salesapp.Order" %>
 <!DOCTYPE html>
 <html>
@@ -27,7 +27,7 @@
         <tbody>
             <% 
                 // サーブレットでセットした orderList を取得
-                ArrayList<Order> orderList = (ArrayList<Order>) request.getAttribute("orderList");
+                List<Order> orderList = (List<Order>) request.getAttribute("orderList");
                 if (orderList != null) {
                     for (Order order : orderList) {
             %>

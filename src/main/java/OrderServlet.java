@@ -1,11 +1,11 @@
 
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.ArrayList;  // ArrayListをインポートしますが、型はListにします。
+import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -36,7 +36,7 @@ public class OrderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//　別ファイルでOrderクラスを作成すると解決するが保持するデータがどのようなものか未定なため未解決
-		ArrayList<Order> orders = new ArrayList<Order>();
+		List<Order> orders = new ArrayList<Order>();
 
 		try{
 			Connection conn = DriverManager.getConnection(url,user,email);
