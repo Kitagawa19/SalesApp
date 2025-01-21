@@ -10,11 +10,15 @@
 </head>
 <body>
 	<div class="mx-auto" style="width: 300px;">
-		<h1 class="mb-3" style="text-align: center">ログイン面</h1>
-		<form action="/LoginServlet" method="post">
+		<h1 class="mb-3" style="text-align: center">ログイン画面</h1>
+		<form action="${pageContext.request.contextPath}/LoginServlet" method="post">
 		  <div class="mb-3">
 		    <label for="username" class="form-label">ユーザ名</label>
 		    <input type="text" class="form-control" id="username" name="username">
+		  </div>
+		  <div class="mb-3">
+		    <label for="email" class="form-label">メールアドレス</label>
+		    <input type="text" class="form-control" id="email" name="email">
 		  </div>
 		  <div class="mb-3">
 		    <label for="password" class="form-label">パスワード</label>
